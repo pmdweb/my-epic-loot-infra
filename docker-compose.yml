@@ -37,7 +37,7 @@ services:
   backend:
     build:
       context: ../my-epic-loot-backend
-      dockerfile: backend/Dockerfile
+      dockerfile: Dockerfile
     env_file:
       - ./.envs/dev.env
     environment:
