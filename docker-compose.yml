@@ -49,6 +49,9 @@ services:
       POSTGRES_HOST: db
       POSTGRES_PORT: "5432"
       DJANGO_COLLECTSTATIC: "0"
+      # Google OAuth credentials - set these as environment variables
+      GOOGLE_OAUTH2_CLIENT_ID: "${GOOGLE_OAUTH2_CLIENT_ID}"
+      GOOGLE_OAUTH2_CLIENT_SECRET: "${GOOGLE_OAUTH2_CLIENT_SECRET}"
     depends_on:
       db:
         condition: service_healthy
@@ -89,6 +92,14 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - WATCHPACK_POLLING=true
+      # NextAuth.js configuration
+      - NEXTAUTH_URL=http://localhost:3000
+      - NEXTAUTH_SECRET=your-secret-here-change-in-production
+      # Google OAuth credentials - set these as environment variables
+      - GOOGLE_CLIENT_ID=${GOOGLE_CLIENT_ID}
+      - GOOGLE_CLIENT_SECRET=${GOOGLE_CLIENT_SECRET}
+      # Backend API
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
     depends_on:
       - backend
 
